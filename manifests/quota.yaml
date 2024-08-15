@@ -5,13 +5,7 @@ metadata:
   namespace: argoapp1
 spec:
   hard:
-    persistentvolumeclaims: "25"
     requests.ephemeral-storage: '25G'
     limits.ephemeral-storage: '25G'
-    requests.storage: "1400Gi"
-    ocs-storagecluster-ceph-rbd.storageclass.storage.k8s.io/requests.storage: "1400Gi"
-    ocs-storagecluster-ceph-rgw.storageclass.storage.k8s.io/requests.storage: "0"
-    ocs-storagecluster-cephfs.storageclass.storage.k8s.io/requests.storage: "0"
-    openshift-storage.noobaa.io.storageclass.storage.k8s.io/requests.storage: "0"
     services.loadbalancers: "12",
     services.nodeports: "0"
