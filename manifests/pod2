@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubi-01
+spec:
+  containers:
+  - name: ubi
+    image: ubi8:latest
+    ports:
+    - containerPort: 80
