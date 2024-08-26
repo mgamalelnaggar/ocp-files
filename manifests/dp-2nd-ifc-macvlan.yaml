@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: macvlan-ens1f1-n0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      namespace: test-ns01
+      name: macvlan-ens1f1-n0
+      labels:
+        app: test
+      annotations:
+        k8s.v1.cni.cncf.io/networks: "macvlan-ens1f1-3866-network"
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: lab-ocp-w4.ocp.labtelco.stc
+      containers:
+      - name: test
+        image: registry.fedoraproject.org/fedora
+        command:
+        - bash
+        - -xc
+        - |
+          while true; do
+            cat /proc/self/status | grep Cpus
+            cat  /sys/class/net/net1/device/numa_node
+            sleep 86400
+          done
+        resources:
+          limits:
+            cpu: 1
+            memory: 100Mi
