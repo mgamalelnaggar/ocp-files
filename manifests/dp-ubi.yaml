@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubi-dp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      namespace: test-ns-api
+      name: ubi
+      labels:
+        app: test
+    spec:
+      containers:
+      - name: test
+        image: ubi8
+        imagePullPolicy: Always
+        command:
+        - bash
+        - -xc
+        - |
+          while true; do
+            cat /proc/self/status | grep Cpus
+            cat  /sys/class/net/net1/device/numa_node
+            sleep 86400
+          done
+        resources:
+          limits:
+            cpu: 1
+            memory: 100Mi
