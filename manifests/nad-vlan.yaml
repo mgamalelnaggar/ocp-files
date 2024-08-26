@@ -1,0 +1,9 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vlan
+  namespace: stc-cnf
+spec:
+  config: '{ "cniVersion": "0.3.1", "name": "vlan", "type": "vlan",
+    "master": "nwbond", "vlanId": 1234, "linksInContainer": true, "mtu": 1500, "ipam":
+    { "type": "whereabouts", "range": "10.44.55.0/24" } }'
