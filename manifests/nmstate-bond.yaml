@@ -1,0 +1,26 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: bond2-ens2f0-ens5f0-policy-w1
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: lab-ocp-w1.ocp.labtelco.stc
+  desiredState:
+    interfaces:
+    - name: bond2 
+      description: Bond with ports eth1 and eth2 
+      type: bond 
+      state: up 
+      ipv4:
+        dhcp: false 
+        enabled: false 
+      link-aggregation:
+        mode: active-backup 
+        options:
+          miimon: '140' 
+        port: 
+        - ens2f0
+        - ens5f0
+      mtu: 1500
+      lldp:
+        enabled: true
